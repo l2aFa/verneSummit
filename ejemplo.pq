@@ -1,17 +1,24 @@
-let func =   
- (Start as datetime, End as datetime) =>
-    List.Transform( {0..Number.Round(Number.From(End- Start)*24, 0)}, each Start + #duration(0, _, 0, 0)) ,
-documentation = [
-Documentation.Name =  " DateTime.HoursBetween ",
-Documentation.Description = " Returns a list of hours (datetime) that lie between the <code>Start</code> and <code>End</code>  ",
-Documentation.LongDescription = " Returns a list of hours (datetime) that lie between the <code>Start</code> and <code>End</code>  ",
-Documentation.Category = " DateTime ",
-Documentation.Source = " . https://goo.gl/1mJHpP . ",
-Documentation.Version = " 1.0 ",
-Documentation.Author = " BillSzysz https://goo.gl/1mJHpP . ",
-Documentation.Examples = {[Description =  "  ",
-Code = " DateTime.HoursBetween( #datetime(2018, 7, 8, 1, 0, 0), #datetime(2018, 7, 8, 4, 29, 0) ) ",
-Result = " {""08/07/2018 01:00:00"", ""08/07/2018 02:00:00"", ""08/07/2018 03:00:00"", ""08/07/2018 04:00:00""} "]}]
-  
- in  
-  Value.ReplaceType(func, Value.ReplaceMetadata(Value.Type(func), documentation))  
+/*
+  convert date from SAP ByDesign into normal date
+  SAP JSON response shows date as "/Date(1357084800000)/"
+  can be used with 
+  Table.TransformColumns(Expand,{{"Posting Date", EpochToDate}})
+*/
+
+let EpochToDateTime = (epoch as nullable text ) =>
+let
+    res = if epoch = null 
+     then null
+    else
+    let
+     remove_word = Text.Replace(epoch, "Date", ""),
+     remove_slash = Text.Replace(remove_word, "/", ""),
+     remove_left_par = Text.Replace(remove_slash, "(", ""),
+     remove_right_par = Text.Replace(remove_left_par, ")", ""),
+     calc = #datetime(1970, 1, 1, 0, 0, 0) + #duration(0, 0, 0, Number.FromText(Text.Start(remove_right_par,Text.Length(remove_right_par)-3)))
+    in 
+      calc
+in
+    res
+in 
+    EpochToDateTime
