@@ -1,7 +1,7 @@
 let
-    Origen = (ConsultaAuditoria as table) => let
+    Origen = (ConsultaAuditoria as table) as table => let
         // Invocación de la función Table.Profile sobre la consulta recibida
-        Origen = Table.Profile(Expression.Evaluate(ConsultaAuditoria, #shared)),
+        Origen = Table.Profile(ConsultaAuditoria),
         // Nos quedamos con las columnas que necesitamos
         #"Selección de columnas" = Table.SelectColumns(Origen,{"Column", "Count", "NullCount", "DistinctCount"}),
         #"Ajuste de tipo de datos" = Table.TransformColumnTypes(#"Selección de columnas",{{"NullCount", Int64.Type}, {"DistinctCount", Int64.Type}
