@@ -25,7 +25,7 @@ Documentation.Category = " Table ",
 Documentation.Source = " . https://github.com/l2aFa/verneSummitAlgodon . ",
 Documentation.Version = " 1.0 ",
 Documentation.Author = " Rafael Báguena ",
-Documentation.Examples = {[Description =  "  ",
+Documentation.Examples = {[Description =  " Devuelve una tabla con las estadísticas asociadas a cada una de sus columnas ",
 Code = " AuditarConsulta ( NombreConsulta ) ",
 Result = " //  Columna| Total de registros| Total de nulos| Valores únicos| 
 {//---------|-------------------|---------------|---------------|  
