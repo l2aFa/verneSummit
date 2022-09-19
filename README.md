@@ -1,2 +1,2 @@
 # El algodón no engaña, higiene del desarrollo en Power BI
-Repositorio para demostración de sesiones del Summit
+Repositorio para demostraciones durante la sesión del Verne Summit 2022
