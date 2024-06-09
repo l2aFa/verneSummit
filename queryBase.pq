@@ -1,3 +1,4 @@
+// Extensión de valores devueltos por función Table.Profile
 let
     // Invocación de la función Table.Profile sobre la consulta recibida
     Origen = Table.Profile(Expression.Evaluate(ConsultaAuditoria, #shared)),
